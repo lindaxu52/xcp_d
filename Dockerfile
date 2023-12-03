@@ -8,7 +8,7 @@ ARG VERSION=0.0.1
 # Force static versioning within container
 RUN echo "${VERSION}" > /src/xcp_d/xcp_d/VERSION && \
     echo "include xcp_d/VERSION" >> /src/xcp_d/MANIFEST.in && \
-    pip install --no-cache-dir "/src/xcp_d[all]"
+    pip3 install --no-cache-dir "/src/xcp_d[all]"
 
 RUN find $HOME -type d -exec chmod go=u {} + && \
     find $HOME -type f -exec chmod go=u {} + && \
