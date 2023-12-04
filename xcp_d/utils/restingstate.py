@@ -115,9 +115,9 @@ def compute_alff(data_matrix, low_pass, high_pass, TR):
     Implementation based on https://pubmed.ncbi.nlm.nih.gov/16919409/.
     """
     fs = 1 / TR  # sampling frequency
-    # alff = np.zeros(data_matrix.shape[0])  # Create a matrix of zeros in the shape of
+    alff = np.zeros(data_matrix.shape[0])  # Create a matrix of zeros in the shape of
     # number of voxels
-    for ii in range(data_matrix.shape[0]):  # Loop through the voxels
+    # for ii in range(data_matrix.shape[0]):  # Loop through the voxels
         # get array of sample frequencies + power spectrum density
         # array_of_sample_frequencies, power_spec_density = signal.periodogram(
         #     data_matrix[ii, :], fs, scaling="spectrum"
