@@ -128,11 +128,9 @@ def compute_alff(data_matrix, low_pass, high_pass, TR):
         ff_alff = [
             np.argmin(np.abs(array_of_sample_frequencies - high_pass)),
             np.argmin(np.abs(array_of_sample_frequencies - low_pass)),
-        ]
-        alff[ii] = 2
- 
-        # run alff but it's actually falff 
-        # alff[ii] = np.mean(power_spec_density_sqrt[ff_alff[0]: ff_alff[1]]) / np.mean(power_spec_density_sqrt[ff_alff[0]:])
+        ] 
+        # run alff but it's actually falff
+        alff[ii] = np.mean(power_spec_density_sqrt[ff_alff[0]: ff_alff[1]]) / np.mean(power_spec_density_sqrt[ff_alff[0]:])
 
         # alff for that voxel is 2 * the mean of the sqrt of the power spec density
         # from the value closest to the low pass cutoff, to the value closest
