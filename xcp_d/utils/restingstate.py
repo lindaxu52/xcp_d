@@ -115,7 +115,7 @@ def compute_alff(data_matrix, low_pass, high_pass, TR):
     Implementation based on https://pubmed.ncbi.nlm.nih.gov/16919409/.
     """
     fs = 1 / TR  # sampling frequency
-    alff = np.zeros(data_matrix.shape[0])  # Create a matrix of zeros in the shape of
+    alff2 = np.zeros(data_matrix.shape[0])  # Create a matrix of zeros in the shape of
     # number of voxels
     for ii in range(data_matrix.shape[0]):  # Loop through the voxels
         # get array of sample frequencies + power spectrum density
@@ -129,7 +129,7 @@ def compute_alff(data_matrix, low_pass, high_pass, TR):
             np.argmin(np.abs(array_of_sample_frequencies - high_pass)),
             np.argmin(np.abs(array_of_sample_frequencies - low_pass)),
         ] 
-        alff[ii] = len(ff_alff) * np.mean(power_spec_density_sqrt[ff_alff[0] : ff_alff[1]]) * 2 
+        alff2[ii] = len(ff_alff) * np.mean(power_spec_density_sqrt[ff_alff[0] : ff_alff[1]]) * 2 
 
         # run alff but it's actually falff
         # alff[ii] = np.mean(power_spec_density_sqrt[ff_alff[0]: ff_alff[1]]) / np.mean(power_spec_density_sqrt[ff_alff[0]:])
@@ -140,5 +140,5 @@ def compute_alff(data_matrix, low_pass, high_pass, TR):
         # alff[ii] = len(ff_alff) * np.mean(power_spec_density_sqrt[ff_alff[0] : ff_alff[1]])
 
     # reshape alff so it's no longer 1 dimensional, but a #ofvoxels by 1 matrix
-    alff = np.reshape(alff, [len(alff), 1])
-    return alff
+    alff2 = np.reshape(alff2, [len(alff2), 1])
+    return alff2
