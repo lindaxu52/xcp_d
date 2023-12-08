@@ -126,13 +126,16 @@ def compute_alff(data_matrix, low_pass, high_pass, TR):
         power_spec_density_sqrt = np.sqrt(power_spec_density)
         # get the position of the arguments closest to high_pass and low_pass, respectively
         ff_alff = [
-            np.argmin(np.abs(array_of_sample_frequencies - high_pass)),
-            np.argmin(np.abs(array_of_sample_frequencies - low_pass)),
+            np.argmin(np.abs(array_of_sample_frequencies - 0.01)),
+            np.argmin(np.abs(array_of_sample_frequencies - 0.08)),
         ]
-        # num = np.sum(power_spec_density_sqrt[ff_alff[0] : ff_alff[1]])
+        ff_alff2 = [
+            np.argmin(np.abs(array_of_sample_frequencies - 0.01)),
+            np.argmin(np.abs(array_of_sample_frequencies - 0.25)),
+        ]
+        num = np.sum(power_spec_density_sqrt[ff_alff[0] : ff_alff[1]])
         # denom = np.sum(power_spec_density_sqrt[ff_alff[0] :])
-        num = np.sqrt(np.sum(power_spec_density[ff_alff[0] : ff_alff[1]]))
-        denom = np.sqrt(np.sum(power_spec_density[ff_alff[0] :]))
+        denom = np.sum(power_spec_density_sqrt[ff_alff2[0] : ff_alff2[1]])
         alff[ii] = num / denom
         # alff[ii] = len(ff_alff) * np.mean(power_spec_density_sqrt[ff_alff[0] : ff_alff[1]])
         # alff for that voxel is 2 * the mean of the sqrt of the power spec density
