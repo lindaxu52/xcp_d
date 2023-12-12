@@ -120,18 +120,20 @@ def compute_alff(data_matrix, low_pass, high_pass, TR):
     for ii in range(data_matrix.shape[0]):  # Loop through the voxels
         # get array of sample frequencies + power spectrum density
         # periodogram outputs all frequencies with associated power
-        array_of_sample_frequencies, power_spec_density = signal.periodogram(
+        array_of_sample_frequencies, powe(
             data_matrix[ii, :], fs, scaling="spectrum"
         )
         # square root of power spectrum density
-        power_spec_density_sqrt = np.sqrt(power_spec_density)
+        # power_spec_density_sqrt = np.sqrt(power_spec_density)
         # get the position of the arguments closest to high_pass and low_pass, respectively
         ff_alff = [
             np.argmin(np.abs(array_of_sample_frequencies - high_pass)),
             np.argmin(np.abs(array_of_sample_frequencies - low_pass)),
         ]
-        num = np.sum(power_spec_density_sqrt[ff_alff[0] : ff_alff[1]])
-        denom = np.sum(power_spec_density_sqrt[ff_alff[0] :])
+        # num = np.sum(power_spec_density_sqrt[ff_alff[0] : ff_alff[1]])
+        # denom = np.sum(power_spec_density_sqrt[ff_alff[0] :])
+        num = np.sum(power_spec_density[ff_alff[0] : ff_alff[1]])
+        denom = np.sum(power_spec_density[ff_alff[0] :])
         alff[ii] = num / denom
         # alff[ii] = len(ff_alff) * np.mean(power_spec_density_sqrt[ff_alff[0] : ff_alff[1]])
         # alff for that voxel is 2 * the mean of the sqrt of the power spec density
@@ -140,5 +142,4 @@ def compute_alff(data_matrix, low_pass, high_pass, TR):
 
     # reshape alff so it's no longer 1 dimensional, but a #ofvoxels by 1 matrix
     alff = np.reshape(alff, [len(alff), 1])
-    # return alff
-    return data_matrix
+    return alff
