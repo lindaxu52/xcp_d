@@ -140,4 +140,5 @@ def compute_alff(data_matrix, low_pass, high_pass, TR):
 
     # reshape alff so it's no longer 1 dimensional, but a #ofvoxels by 1 matrix
     alff = np.reshape(alff, [len(alff), 1])
-    return alff
+    # return alff
+    return data_matrix
