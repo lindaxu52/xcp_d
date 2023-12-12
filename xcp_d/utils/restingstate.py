@@ -120,7 +120,7 @@ def compute_alff(data_matrix, low_pass, high_pass, TR):
     for ii in range(data_matrix.shape[0]):  # Loop through the voxels
         # get array of sample frequencies + power spectrum density
         # periodogram outputs all frequencies with associated power
-        array_of_sample_frequencies, powe(
+        array_of_sample_frequencies, power_spec_density(
             data_matrix[ii, :], fs, scaling="spectrum"
         )
         # square root of power spectrum density
