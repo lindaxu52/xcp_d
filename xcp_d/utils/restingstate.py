@@ -127,8 +127,8 @@ def compute_alff(data_matrix, low_pass, high_pass, TR):
         # power_spec_density_sqrt = np.sqrt(power_spec_density)
         # get the position of the arguments closest to high_pass and low_pass, respectively
         ff_alff = [
-            np.argmin(np.abs(array_of_sample_frequencies - 0.081)),
-            np.argmin(np.abs(array_of_sample_frequencies - 0.25)),
+            np.argmin(np.abs(array_of_sample_frequencies - 0.011)),
+            np.argmin(np.abs(array_of_sample_frequencies - 0.02)),
         ]
         # num = np.sum(power_spec_density_sqrt[ff_alff[0] : ff_alff[1]])
         # denom = np.sum(power_spec_density_sqrt[ff_alff[0] :])
