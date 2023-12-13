@@ -130,7 +130,8 @@ def compute_alff(data_matrix, low_pass, high_pass, TR):
             np.argmin(np.abs(array_of_sample_frequencies - high_pass)),
             np.argmin(np.abs(array_of_sample_frequencies - low_pass)),
         ]
-        alff[ii] = len(ff_alff) * np.mean(power_spec_density_sqrt[ff_alff[0] : ff_alff[1]])
+        alff[ii] = np.sum(power_spec_density_sqrt)
+        # alff[ii] = len(ff_alff) * np.mean(power_spec_density_sqrt[ff_alff[0] : ff_alff[1]])
         # alff[ii] = len(ff_alff) * np.mean(power_spec_density_sqrt[ff_alff[0] :])
         # num = np.sum(power_spec_density_sqrt[ff_alff[0] : ff_alff[1]])
         # denom = np.sum(power_spec_density_sqrt[ff_alff[0] :])
