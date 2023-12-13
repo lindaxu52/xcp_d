@@ -124,7 +124,7 @@ def compute_alff(data_matrix, low_pass, high_pass, TR):
             data_matrix[ii, :], fs, scaling="spectrum"
         )
         # square root of power spectrum density
-        # power_spec_density_sqrt = np.sqrt(power_spec_density)
+        power_spec_density_sqrt = np.sqrt(power_spec_density)
         # get the position of the arguments closest to high_pass and low_pass, respectively
         ff_alff = [
             np.argmin(np.abs(array_of_sample_frequencies - high_pass)),
