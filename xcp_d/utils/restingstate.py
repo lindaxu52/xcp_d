@@ -108,7 +108,7 @@ def compute_falff(data_matrix, low_pass, high_pass, TR):
     Returns
     -------
     falff : numpy.ndarray
-        ALFF values.
+        fALFF values.
 
     Notes
     -----
