@@ -91,7 +91,7 @@ def mesh_adjacency(hemi):
     return data_array + data_array.T  # transpose data_array and add it to itself
 
 
-def compute_falff(data_matrix, low_pass, high_pass, TR):
+def compute_alff(data_matrix, low_pass, high_pass, TR):
     """Compute amplitude of low-frequency fluctuation (fALFF).
 
     Parameters
@@ -115,7 +115,7 @@ def compute_falff(data_matrix, low_pass, high_pass, TR):
     Implementation based on https://pubmed.ncbi.nlm.nih.gov/16919409/.
     """
     fs = 1 / TR  # sampling frequency
-    falff = np.zeros(data_matrix.shape[0])  # Create a matrix of zeros in the shape of
+    alff = np.zeros(data_matrix.shape[0])  # Create a matrix of zeros in the shape of
     # number of voxels
     for ii in range(data_matrix.shape[0]):  # Loop through the voxels
         # get array of sample frequencies + power spectrum density
@@ -126,18 +126,18 @@ def compute_falff(data_matrix, low_pass, high_pass, TR):
         # square root of power spectrum density
         power_spec_density_sqrt = np.sqrt(power_spec_density)
         # get the position of the arguments closest to high_pass and low_pass, respectively
-        ff_falff = [
+        ff_alff = [
             np.argmin(np.abs(array_of_sample_frequencies - high_pass)),
             np.argmin(np.abs(array_of_sample_frequencies - low_pass)),
         ]
-        falff[ii] = (np.sum(power_spec_density_sqrt[ff_falff[0] : ff_falff[1]])) / (np.sum(power_spec_density_sqrt[ff_falff[0] :]))
+        alff[ii] = (np.sum(power_spec_density_sqrt[ff_alff[0] : ff_alff[1]])) / (np.sum(power_spec_density_sqrt[ff_alff[0] :]))
         # falff is sum(alff)/sum(full power spectrum range). Re-using the ff_alff lower bound so the denominator is power ([f_alff[0]-inf])
-        falff[ii] = np.sum(power_spec_density_sqrt[ff_falff[0]: ff_falff[1]]) / np.sum(power_spec_density_sqrt[ff_falff[0]:])
-        falff = np.reshape(falff, [len(falff), 1])
+        alff[ii] = np.sum(power_spec_density_sqrt[ff_alff[0]: ff_alff[1]]) / np.sum(power_spec_density_sqrt[ff_alff[0]:])
+        alff = np.reshape(alff, [len(alff), 1])
         # alff for that voxel is 2 * the mean of the sqrt of the power spec density
         # from the value closest to the low pass cutoff, to the value closest
         # to the high pass cutoff
 
     # reshape alff so it's no longer 1 dimensional, but a #ofvoxels by 1 matrix
-    falff = np.reshape(falff, [len(falff), 1])
-    return falff
+    alff = np.reshape(alff, [len(alff), 1])
+    return alff
